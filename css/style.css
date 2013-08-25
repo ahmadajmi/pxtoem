@@ -1,0 +1,49 @@
+body {
+  font-size: 100%;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.row {
+	max-width: 800px;
+}
+
+.columns {
+	float: left;
+}
+
+.large-3 {
+	width: 
+}
+
+h1 {
+	font-weight: 300;
+}
+
+input[type="text"] {
+	padding: 10px;
+	border: 1px solid #ddd;
+	margin-bottom: 10px;
+}
+
+input[type="submit"] {
+	padding: 10px;
+}
+
+.input-control {
+	float: left;
+	margin: 0 10px 0 0;
+}

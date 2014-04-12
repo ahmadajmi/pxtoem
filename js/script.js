@@ -4,64 +4,57 @@
  * Inspired by http://pxtoem.com/
  */
 
- function log(string) {
-   return window.console.log(string);
- }
+ var PXTOEM = (function() {
 
- var $pxInput = $('#px'),
- $emInput = $('#em');
+  'use strict';
 
- function convertToEm(target, context) {
-   context = context | 16;
-   return target / context;
- }
+  var config = {
+    context: 16
+  },
+  resultPlace = document.getElementById("result"),
+  em          = document.getElementById("em"),
+  px          = document.getElementById("px"),
+  button      = document.getElementById("submit"),
+  pxtoem, emtopx, clear, printValue;
 
- function convertToPx(target, context){
-   context = context | 16;
-   return target * context;
- }
+  pxtoem = function(value) {
+    return value / config.context;
+  };
 
- function clearInputs(){
-   $pxInput.val('');
-   $emInput.val('');
- }
+  emtopx = function(value) {
+    return value * config.context;
+  };
 
- $pxInput.on('focus', function(){
-   clearInputs();
- })
+  clear = function(input) {
+    return input.value = '';
+  };
 
- $emInput.on('focus', function(){
-   clearInputs();
- })
+  em.addEventListener('focus', function() {
+    clear(px);
+  });
 
- $('input[type="submit"]').on("click",function(event){
+  px.addEventListener('focus', function() {
+    clear(em);
+  });
 
-   event.preventDefault();
-
-   var pxValue = document.getElementById("px").value.replace(/[^0-9.]/g, ''),
-   emValue = document.getElementById("em").value.replace(/[^0-9.]/g, ''),
-   resultId = document.getElementById("result");
-
-   if (!pxValue && !emValue) {
-    log("Please Insert PX or EM values");
-    return;
+  printValue = function(value) {
+    return resultPlace.innerHTML = value;
   }
 
-  if (pxValue) {
-    var pxToEmResult =  convertToEm(pxValue) + "em";
-  }
+  button.addEventListener('click', function(event) {
 
-  if (emValue) {
-    var emToPxResult =  convertToPx(emValue) + "px";
-  }
+    event.preventDefault();
 
-  resultId.innerHTML = (pxValue ? pxValue + "/" + 16 : emValue + "*" + 16)  + " = " + (pxValue ? pxToEmResult : emToPxResult );
+    if (px.value) {
+      var value = px.value.replace(/[^0-9.]/g, '');
+      printValue(pxtoem(value));
+    } else if (em.value) {
+      var value = em.value.replace(/[^0-9.]/g, '');
+      printValue(emtopx(value));
+    } else {
+      printValue('Please type a value');
+    }
 
-});
+  });
 
- resultId = document.getElementById("result");
-
- $("#change").keyup(function(){
-   console.log(12);
-   resultId.innerHTML = $(this).val();
- })
+})();

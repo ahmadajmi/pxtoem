@@ -29,6 +29,10 @@
     return input.value = '';
   };
 
+  printValue = function(value) {
+    return resultPlace.innerHTML = value;
+  }
+
   em.addEventListener('focus', function() {
     clear(px);
   });
@@ -36,10 +40,6 @@
   px.addEventListener('focus', function() {
     clear(em);
   });
-
-  printValue = function(value) {
-    return resultPlace.innerHTML = value;
-  }
 
   button.addEventListener('click', function(event) {
 
